@@ -4,8 +4,12 @@ export default function Home() {
             <main
                 className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
                 <section>
-                    <h1>Social Media Repurposer</h1>
+                    <header>
+                        <h1>Social Media Repurposer</h1>
 
+                        <p> Transform transcripts into platform-specific social media content.</p>
+
+                    </header>
                     <form>
                         <label htmlFor="transcript">
                             Transcript
@@ -18,6 +22,17 @@ export default function Home() {
                             Generate
                         </button>
                     </form>
+                </section>
+                <section>
+                    <h2>Summary</h2>
+                    <article></article>
+                </section>
+                <section>
+                    <h2>Linkedin Post</h2>
+                    <article></article>
+                </section>
+                <section>Twitter Post
+                <article></article>
                 </section>
             </main>
         </div>
