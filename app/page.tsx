@@ -14,6 +14,9 @@ export default function Home() {
                             id="transcript"
                             rows={10}
                         />
+                        <button type="submit">
+                            Generate
+                        </button>
                     </form>
                 </section>
             </main>
