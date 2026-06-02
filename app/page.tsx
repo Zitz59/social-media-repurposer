@@ -1,4 +1,14 @@
+'use client'
+import {useState} from "react";
+
 export default function Home() {
+    const [transcript, setTranscript] = useState<string>("")
+
+    function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+        event.preventDefault()
+        console.log(transcript)
+    }
+
     return (
         <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
             <main
@@ -6,17 +16,17 @@ export default function Home() {
                 <section>
                     <header>
                         <h1>Social Media Repurposer</h1>
-
                         <p> Transform transcripts into platform-specific social media content.</p>
-
                     </header>
-                    <form>
+                    <form onSubmit={handleSubmit}>
                         <label htmlFor="transcript">
                             Transcript
                         </label>
                         <textarea
+                            value={transcript}
                             id="transcript"
                             rows={10}
+                            onChange={(e) => setTranscript(e.target.value)}
                         />
                         <button type="submit">
                             Generate
@@ -31,8 +41,9 @@ export default function Home() {
                     <h2>Linkedin Post</h2>
                     <article></article>
                 </section>
-                <section>Twitter Post
-                <article></article>
+                <section>
+                    <h2>Twitter Post</h2>
+                    <article></article>
                 </section>
             </main>
         </div>
