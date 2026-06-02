@@ -3,6 +3,12 @@ import {useState} from "react";
 
 export default function Home() {
     const [transcript, setTranscript] = useState<string>("")
+
+    function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+        event.preventDefault()
+        console.log(transcript)
+    }
+
     return (
         <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
             <main
@@ -12,7 +18,7 @@ export default function Home() {
                         <h1>Social Media Repurposer</h1>
                         <p> Transform transcripts into platform-specific social media content.</p>
                     </header>
-                    <form>
+                    <form onSubmit={handleSubmit}>
                         <label htmlFor="transcript">
                             Transcript
                         </label>
