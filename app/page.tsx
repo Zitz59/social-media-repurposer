@@ -3,10 +3,19 @@ import {useState} from "react";
 
 export default function Home() {
     const [transcript, setTranscript] = useState<string>("")
+    const [summary, setSummary] = useState<string>("")
+    const [linkedInPost, setLinkedInPost] = useState<string>("")
+    const [twitterPost, setTwitterPost] = useState<string>("")
 
     function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault()
-        console.log(transcript)
+        if (!transcript.trim()) {
+            console.warn('No transcript found.')
+            return
+        }
+        setSummary(`Summary for: ${transcript}`)
+        setLinkedInPost(`Linkedin Version: ${transcript}`)
+        setTwitterPost(`Twitter Version: ${transcript}`)
     }
 
     return (
@@ -33,18 +42,21 @@ export default function Home() {
                         </button>
                     </form>
                 </section>
-                <section>
-                    <h2>Summary</h2>
-                    <article></article>
-                </section>
-                <section>
-                    <h2>Linkedin Post</h2>
-                    <article></article>
-                </section>
-                <section>
-                    <h2>Twitter Post</h2>
-                    <article></article>
-                </section>
+                {summary && (
+                    <section>
+                        <h2>Summary</h2>
+                        <article>{summary}</article>
+                    </section>)}
+                {linkedInPost && (
+                    <section>
+                        <h2>LinkedIn Post</h2>
+                        <article>{linkedInPost}</article>
+                    </section>)}
+                {twitterPost && (
+                    <section>
+                        <h2>Twitter Post</h2>
+                        <article>{twitterPost}</article>
+                    </section>)}
             </main>
         </div>
     );
