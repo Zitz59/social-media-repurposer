@@ -3,10 +3,10 @@
 type TranscriptFormProps = {
     transcript: string;
     setTranscript: (transcript: string) => void;
-    handleSubmit:()=>void;
+    handleSubmit: () => void;
 }
 
-const TranscriptForm = ({transcript, setTranscript, handleSubmit}:TranscriptFormProps,) => (
+const TranscriptForm = ({transcript, setTranscript, handleSubmit}: TranscriptFormProps,) => (
     <form onSubmit={(e) => {
         e.preventDefault()
         handleSubmit()

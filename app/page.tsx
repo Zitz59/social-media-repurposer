@@ -1,6 +1,7 @@
 'use client'
 import {useState} from "react";
 import TranscriptForm from "@/components/TranscriptForm";
+import ResultSection from "@/components/ResultSection";
 
 export default function Home() {
     const [transcript, setTranscript] = useState("")
@@ -32,21 +33,9 @@ export default function Home() {
                         transcript={transcript}
                         setTranscript={setTranscript}/>
                 </section>
-                {summary && (
-                    <section>
-                        <h2>Summary</h2>
-                        <article>{summary}</article>
-                    </section>)}
-                {linkedinPost && (
-                    <section>
-                        <h2>LinkedIn Post</h2>
-                        <article>{linkedinPost}</article>
-                    </section>)}
-                {twitterPost && (
-                    <section>
-                        <h2>Twitter Post</h2>
-                        <article>{twitterPost}</article>
-                    </section>)}
+                {summary && <ResultSection title='Summary' content={summary}/>}
+                {linkedinPost && <ResultSection title={'LinkedIn Post'} content={linkedinPost}/>}
+                {twitterPost && <ResultSection title={'Twitter Post'} content={twitterPost}/>}
             </main>
         </div>
     );
