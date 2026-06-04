@@ -8,15 +8,26 @@ export default function Home() {
     const [summary, setSummary] = useState("")
     const [linkedinPost, setLinkedinPost] = useState("")
     const [twitterPost, setTwitterPost] = useState("")
+    const [isLoading, setIsLoading] = useState(false)
 
-    function handleSubmit() {
+    function delay(ms: number) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    async function handleSubmit() {
         if (!transcript.trim()) {
             console.warn('No transcript found.')
             return
         }
+        setIsLoading(true);
+
+        await delay(2000)
+
         setSummary(`Summary for: ${transcript}`)
         setLinkedinPost(`Linkedin Version: ${transcript}`)
         setTwitterPost(`Twitter Version: ${transcript}`)
+
+        setIsLoading(false)
     }
 
     return (
@@ -31,7 +42,8 @@ export default function Home() {
                     <TranscriptForm
                         handleSubmit={handleSubmit}
                         transcript={transcript}
-                        setTranscript={setTranscript}/>
+                        setTranscript={setTranscript}
+                        isLoading={isLoading}/>
                 </section>
                 {summary && <ResultSection title='Summary' content={summary}/>}
                 {linkedinPost && <ResultSection title={'LinkedIn Post'} content={linkedinPost}/>}

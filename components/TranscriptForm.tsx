@@ -1,12 +1,15 @@
 'use client'
 
+import Button from "@/components/Button";
+
 type TranscriptFormProps = {
     transcript: string;
     setTranscript: (transcript: string) => void;
     handleSubmit: () => void;
+    isLoading: boolean;
 }
 
-const TranscriptForm = ({transcript, setTranscript, handleSubmit}: TranscriptFormProps,) => (
+const TranscriptForm = ({transcript, setTranscript, handleSubmit, isLoading}: TranscriptFormProps,) => (
     <form onSubmit={(e) => {
         e.preventDefault()
         handleSubmit()
@@ -20,9 +23,10 @@ const TranscriptForm = ({transcript, setTranscript, handleSubmit}: TranscriptFor
             rows={10}
             onChange={(e) => setTranscript(e.target.value)}
         />
-        <button type="submit">
+        <Button type="submit"
+                isLoading={isLoading} loadingText={"Loading..."}>
             Generate
-        </button>
+        </Button>
     </form>
 );
 
