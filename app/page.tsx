@@ -1,14 +1,14 @@
 'use client'
 import {useState} from "react";
+import TranscriptForm from "@/components/TranscriptForm";
 
 export default function Home() {
-    const [transcript, setTranscript] = useState<string>("")
-    const [summary, setSummary] = useState<string>("")
-    const [linkedinPost, setLinkedinPost] = useState<string>("")
-    const [twitterPost, setTwitterPost] = useState<string>("")
+    const [transcript, setTranscript] = useState("")
+    const [summary, setSummary] = useState("")
+    const [linkedinPost, setLinkedinPost] = useState("")
+    const [twitterPost, setTwitterPost] = useState("")
 
-    function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
-        event.preventDefault()
+    function handleSubmit() {
         if (!transcript.trim()) {
             console.warn('No transcript found.')
             return
@@ -27,20 +27,10 @@ export default function Home() {
                         <h1>Social Media Repurposer</h1>
                         <p> Transform transcripts into platform-specific social media content.</p>
                     </header>
-                    <form onSubmit={handleSubmit}>
-                        <label htmlFor="transcript">
-                            Transcript
-                        </label>
-                        <textarea
-                            value={transcript}
-                            id="transcript"
-                            rows={10}
-                            onChange={(e) => setTranscript(e.target.value)}
-                        />
-                        <button type="submit">
-                            Generate
-                        </button>
-                    </form>
+                    <TranscriptForm
+                        handleSubmit={handleSubmit}
+                        transcript={transcript}
+                        setTranscript={setTranscript}/>
                 </section>
                 {summary && (
                     <section>
