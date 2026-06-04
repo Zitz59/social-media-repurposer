@@ -4,7 +4,7 @@ import {useState} from "react";
 export default function Home() {
     const [transcript, setTranscript] = useState<string>("")
     const [summary, setSummary] = useState<string>("")
-    const [linkedInPost, setLinkedInPost] = useState<string>("")
+    const [linkedinPost, setLinkedinPost] = useState<string>("")
     const [twitterPost, setTwitterPost] = useState<string>("")
 
     function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
@@ -14,7 +14,7 @@ export default function Home() {
             return
         }
         setSummary(`Summary for: ${transcript}`)
-        setLinkedInPost(`Linkedin Version: ${transcript}`)
+        setLinkedinPost(`Linkedin Version: ${transcript}`)
         setTwitterPost(`Twitter Version: ${transcript}`)
     }
 
@@ -47,10 +47,10 @@ export default function Home() {
                         <h2>Summary</h2>
                         <article>{summary}</article>
                     </section>)}
-                {linkedInPost && (
+                {linkedinPost && (
                     <section>
                         <h2>LinkedIn Post</h2>
-                        <article>{linkedInPost}</article>
+                        <article>{linkedinPost}</article>
                     </section>)}
                 {twitterPost && (
                     <section>
