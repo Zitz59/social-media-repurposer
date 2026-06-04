@@ -1,21 +1,31 @@
 'use client'
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import TranscriptForm from "@/components/TranscriptForm";
 import ResultSection from "@/components/ResultSection";
 
+interface GeneratedContent {
+    summary: string,
+    linkedinPost: string,
+    twitterPost: string
+}
+
 export default function Home() {
+
     const [transcript, setTranscript] = useState("")
-    const [summary, setSummary] = useState("")
-    const [linkedinPost, setLinkedinPost] = useState("")
-    const [twitterPost, setTwitterPost] = useState("")
+    const [generatedContent, setGeneratedContent] = useState<GeneratedContent | null>(null)
     const [isLoading, setIsLoading] = useState(false)
+    useEffect(() => {
+        console.log(generatedContent)
+    }, [generatedContent]) //проверка ввода контента
+
 
     function delay(ms: number) {
         return new Promise(resolve => setTimeout(resolve, ms));
     }
 
     async function handleSubmit() {
-        if (!transcript.trim()) {
+        const trimmedTranscript = transcript.trim()
+        if (!trimmedTranscript) {
             console.warn('No transcript found.')
             return
         }
@@ -23,9 +33,11 @@ export default function Home() {
 
         await delay(2000)
 
-        setSummary(`Summary for: ${transcript}`)
-        setLinkedinPost(`Linkedin Version: ${transcript}`)
-        setTwitterPost(`Twitter Version: ${transcript}`)
+        setGeneratedContent({
+            summary: trimmedTranscript,
+            linkedinPost: trimmedTranscript,
+            twitterPost: trimmedTranscript
+        })
 
         setIsLoading(false)
     }
@@ -45,9 +57,9 @@ export default function Home() {
                         setTranscript={setTranscript}
                         isLoading={isLoading}/>
                 </section>
-                {summary && <ResultSection title='Summary' content={summary}/>}
-                {linkedinPost && <ResultSection title={'LinkedIn Post'} content={linkedinPost}/>}
-                {twitterPost && <ResultSection title={'Twitter Post'} content={twitterPost}/>}
+                {generatedContent && <ResultSection title='Summary' content={generatedContent.summary}/>}
+                {generatedContent && <ResultSection title={'LinkedIn Post'} content={generatedContent.linkedinPost}/>}
+                {generatedContent && <ResultSection title={'Twitter Post'} content={generatedContent.twitterPost}/>}
             </main>
         </div>
     );
