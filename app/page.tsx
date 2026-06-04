@@ -1,9 +1,9 @@
 'use client'
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import TranscriptForm from "@/components/TranscriptForm";
 import ResultSection from "@/components/ResultSection";
 
-interface GeneratedContent {
+export interface GeneratedContent {
     summary: string,
     linkedinPost: string,
     twitterPost: string
@@ -14,14 +14,10 @@ export default function Home() {
     const [transcript, setTranscript] = useState("")
     const [generatedContent, setGeneratedContent] = useState<GeneratedContent | null>(null)
     const [isLoading, setIsLoading] = useState(false)
-    useEffect(() => {
-        console.log(generatedContent)
-    }, [generatedContent]) //проверка ввода контента
 
-
-    function delay(ms: number) {
-        return new Promise(resolve => setTimeout(resolve, ms));
-    }
+    // function delay(ms: number) {
+    //     return new Promise(resolve => setTimeout(resolve, ms));
+    // }
 
     async function handleSubmit() {
         const trimmedTranscript = transcript.trim()
@@ -31,13 +27,17 @@ export default function Home() {
         }
         setIsLoading(true);
 
-        await delay(2000)
-
-        setGeneratedContent({
-            summary: trimmedTranscript,
-            linkedinPost: trimmedTranscript,
-            twitterPost: trimmedTranscript
+        const response = await fetch('/api/generate', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({transcript: trimmedTranscript})
         })
+
+        const data = await response.json()
+
+        console.log(data)
+
+        setGeneratedContent(data)
 
         setIsLoading(false)
     }
