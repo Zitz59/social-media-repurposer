@@ -1,12 +1,33 @@
 'use client'
 import {useState} from "react";
+import TranscriptForm from "@/components/TranscriptForm";
+import ResultSection from "@/components/ResultSection";
 
 export default function Home() {
-    const [transcript, setTranscript] = useState<string>("")
+    const [transcript, setTranscript] = useState("")
+    const [summary, setSummary] = useState("")
+    const [linkedinPost, setLinkedinPost] = useState("")
+    const [twitterPost, setTwitterPost] = useState("")
+    const [isLoading, setIsLoading] = useState(false)
 
-    function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
-        event.preventDefault()
-        console.log(transcript)
+    function delay(ms: number) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    async function handleSubmit() {
+        if (!transcript.trim()) {
+            console.warn('No transcript found.')
+            return
+        }
+        setIsLoading(true);
+
+        await delay(2000)
+
+        setSummary(`Summary for: ${transcript}`)
+        setLinkedinPost(`Linkedin Version: ${transcript}`)
+        setTwitterPost(`Twitter Version: ${transcript}`)
+
+        setIsLoading(false)
     }
 
     return (
@@ -18,33 +39,15 @@ export default function Home() {
                         <h1>Social Media Repurposer</h1>
                         <p> Transform transcripts into platform-specific social media content.</p>
                     </header>
-                    <form onSubmit={handleSubmit}>
-                        <label htmlFor="transcript">
-                            Transcript
-                        </label>
-                        <textarea
-                            value={transcript}
-                            id="transcript"
-                            rows={10}
-                            onChange={(e) => setTranscript(e.target.value)}
-                        />
-                        <button type="submit">
-                            Generate
-                        </button>
-                    </form>
+                    <TranscriptForm
+                        handleSubmit={handleSubmit}
+                        transcript={transcript}
+                        setTranscript={setTranscript}
+                        isLoading={isLoading}/>
                 </section>
-                <section>
-                    <h2>Summary</h2>
-                    <article></article>
-                </section>
-                <section>
-                    <h2>Linkedin Post</h2>
-                    <article></article>
-                </section>
-                <section>
-                    <h2>Twitter Post</h2>
-                    <article></article>
-                </section>
+                {summary && <ResultSection title='Summary' content={summary}/>}
+                {linkedinPost && <ResultSection title={'LinkedIn Post'} content={linkedinPost}/>}
+                {twitterPost && <ResultSection title={'Twitter Post'} content={twitterPost}/>}
             </main>
         </div>
     );
