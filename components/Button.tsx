@@ -33,13 +33,10 @@ const Button = ({
         ${className}
     `}
     >
-        {/* Распорка — всегда занимает место, но невидима */}
         <span className="invisible flex items-center gap-2">
-        <span className="h-4 w-4" />
+        <span className="h-4 w-4"/>
             {loadingText}
     </span>
-
-        {/* Реальный контент поверх */}
         <span className="absolute inset-0 flex items-center justify-center gap-2">
         {isLoading ? (
             <>

@@ -2,32 +2,43 @@
 import {useState} from "react";
 import TranscriptForm from "@/components/TranscriptForm";
 import ResultSection from "@/components/ResultSection";
+import {GeneratedContent} from "@/src/types/generated-content";
 
 export default function Home() {
-    const [transcript, setTranscript] = useState("")
-    const [summary, setSummary] = useState("")
-    const [linkedinPost, setLinkedinPost] = useState("")
-    const [twitterPost, setTwitterPost] = useState("")
-    const [isLoading, setIsLoading] = useState(false)
 
-    function delay(ms: number) {
-        return new Promise(resolve => setTimeout(resolve, ms));
-    }
+    const [transcript, setTranscript] = useState("")
+    const [generatedContent, setGeneratedContent] = useState<GeneratedContent | null>(null)
+    const [isLoading, setIsLoading] = useState(false)
+    const [error, setError] = useState("")
 
     async function handleSubmit() {
-        if (!transcript.trim()) {
+        const trimmedTranscript = transcript.trim()
+        if (!trimmedTranscript) {
             console.warn('No transcript found.')
             return
         }
         setIsLoading(true);
+        setError("")
 
-        await delay(2000)
+        try {
+            const response = await fetch('/api/generate', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({transcript: trimmedTranscript})
+            })
+            if (!response.ok) {
+                throw new Error(``)
+            }
+            const data: GeneratedContent = await response.json()
 
-        setSummary(`Summary for: ${transcript}`)
-        setLinkedinPost(`Linkedin Version: ${transcript}`)
-        setTwitterPost(`Twitter Version: ${transcript}`)
+            setGeneratedContent(data)
 
-        setIsLoading(false)
+        } catch (error) {
+            console.error(error)
+            setError("Failed to generate new content. Please try again.")
+        } finally {
+            setIsLoading(false)
+        }
     }
 
     return (
@@ -44,10 +55,11 @@ export default function Home() {
                         transcript={transcript}
                         setTranscript={setTranscript}
                         isLoading={isLoading}/>
+                    {error && (<p>{error}</p>)}
                 </section>
-                {summary && <ResultSection title='Summary' content={summary}/>}
-                {linkedinPost && <ResultSection title={'LinkedIn Post'} content={linkedinPost}/>}
-                {twitterPost && <ResultSection title={'Twitter Post'} content={twitterPost}/>}
+                {generatedContent && <ResultSection title='Summary' content={generatedContent.summary}/>}
+                {generatedContent && <ResultSection title={'LinkedIn Post'} content={generatedContent.linkedinPost}/>}
+                {generatedContent && <ResultSection title={'Twitter Post'} content={generatedContent.twitterPost}/>}
             </main>
         </div>
     );
