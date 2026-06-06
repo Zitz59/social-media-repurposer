@@ -15,10 +15,6 @@ export default function Home() {
     const [generatedContent, setGeneratedContent] = useState<GeneratedContent | null>(null)
     const [isLoading, setIsLoading] = useState(false)
 
-    // function delay(ms: number) {
-    //     return new Promise(resolve => setTimeout(resolve, ms));
-    // }
-
     async function handleSubmit() {
         const trimmedTranscript = transcript.trim()
         if (!trimmedTranscript) {
@@ -27,19 +23,24 @@ export default function Home() {
         }
         setIsLoading(true);
 
-        const response = await fetch('/api/generate', {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({transcript: trimmedTranscript})
-        })
+        try {
+            const response = await fetch('/api/generate', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({transcript: trimmedTranscript})
+            })
+            if (!response.ok) {
+                throw new Error(`Failed to generate content`)
+            }
+            const data: GeneratedContent = await response.json()
 
-        const data = await response.json()
+            setGeneratedContent(data)
 
-        console.log(data)
-
-        setGeneratedContent(data)
-
-        setIsLoading(false)
+        } catch (error) {
+            console.error(error)
+        } finally {
+            setIsLoading(false)
+        }
     }
 
     return (
