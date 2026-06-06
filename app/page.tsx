@@ -2,18 +2,14 @@
 import {useState} from "react";
 import TranscriptForm from "@/components/TranscriptForm";
 import ResultSection from "@/components/ResultSection";
-
-export interface GeneratedContent {
-    summary: string,
-    linkedinPost: string,
-    twitterPost: string
-}
+import {GeneratedContent} from "@/src/types/generated-content";
 
 export default function Home() {
 
     const [transcript, setTranscript] = useState("")
     const [generatedContent, setGeneratedContent] = useState<GeneratedContent | null>(null)
     const [isLoading, setIsLoading] = useState(false)
+    const [error, setError] = useState("")
 
     async function handleSubmit() {
         const trimmedTranscript = transcript.trim()
@@ -22,6 +18,7 @@ export default function Home() {
             return
         }
         setIsLoading(true);
+        setError("")
 
         try {
             const response = await fetch('/api/generate', {
@@ -30,7 +27,7 @@ export default function Home() {
                 body: JSON.stringify({transcript: trimmedTranscript})
             })
             if (!response.ok) {
-                throw new Error(`Failed to generate content`)
+                throw new Error(``)
             }
             const data: GeneratedContent = await response.json()
 
@@ -38,6 +35,7 @@ export default function Home() {
 
         } catch (error) {
             console.error(error)
+            setError("Failed to generate new content. Please try again.")
         } finally {
             setIsLoading(false)
         }
@@ -57,6 +55,7 @@ export default function Home() {
                         transcript={transcript}
                         setTranscript={setTranscript}
                         isLoading={isLoading}/>
+                    {error && (<p>{error}</p>)}
                 </section>
                 {generatedContent && <ResultSection title='Summary' content={generatedContent.summary}/>}
                 {generatedContent && <ResultSection title={'LinkedIn Post'} content={generatedContent.linkedinPost}/>}
