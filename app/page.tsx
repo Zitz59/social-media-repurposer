@@ -3,6 +3,7 @@ import {useState} from "react";
 import TranscriptForm from "@/components/TranscriptForm";
 import ResultSection from "@/components/ResultSection";
 import {GeneratedContent} from "@/src/types/generated-content";
+import {generateContent} from "@/src/services/generate-content";
 
 export default function Home() {
 
@@ -14,27 +15,19 @@ export default function Home() {
     async function handleSubmit() {
         const trimmedTranscript = transcript.trim()
         if (!trimmedTranscript) {
-            console.warn('No transcript found.')
             return
         }
+
         setIsLoading(true);
         setError("")
 
         try {
-            const response = await fetch('/api/generate', {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({transcript: trimmedTranscript})
-            })
-            if (!response.ok) {
-                throw new Error(``)
-            }
-            const data: GeneratedContent = await response.json()
-
+            const data = await generateContent(trimmedTranscript)
             setGeneratedContent(data)
 
         } catch (error) {
             console.error(error)
+            setGeneratedContent(null)
             setError("Failed to generate new content. Please try again.")
         } finally {
             setIsLoading(false)
@@ -55,7 +48,7 @@ export default function Home() {
                         transcript={transcript}
                         setTranscript={setTranscript}
                         isLoading={isLoading}/>
-                    {error && (<p>{error}</p>)}
+                    {error && (<p className="text-red-600 text-sm">{error}</p>)}
                 </section>
                 {generatedContent && <ResultSection title='Summary' content={generatedContent.summary}/>}
                 {generatedContent && <ResultSection title={'LinkedIn Post'} content={generatedContent.linkedinPost}/>}
