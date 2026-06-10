@@ -18,8 +18,9 @@ export default function Home() {
             return
         }
 
-        setIsLoading(true);
         setError("")
+        setGeneratedContent(null)
+        setIsLoading(true);
 
         try {
             const data = await generateContent(trimmedTranscript)
