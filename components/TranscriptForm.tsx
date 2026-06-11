@@ -21,8 +21,7 @@ const TranscriptForm = ({
                             placeholder
                         }: TranscriptFormProps) => {
 
-
-
+    const isButtonDisabled = isLoading || transcript.length >= maxLength;
 
     const getCounterColor = () => {
         const percentage = (transcript.length / maxLength) * 100
@@ -54,7 +53,7 @@ const TranscriptForm = ({
                 </span>
             </div>
             <Button type="submit"
-                    disabled={isLoading}
+                    disabled={isButtonDisabled}
                     isLoading={isLoading}
                     loadingText={"Loading..."}>
                 Generate
