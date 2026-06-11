@@ -45,13 +45,12 @@ export default function Home() {
                         <p> Transform transcripts into platform-specific social media content.</p>
                     </header>
                     <TranscriptForm
-                        value={transcript}
                         maxLength={500}
                         handleSubmit={handleSubmit}
                         transcript={transcript}
                         setTranscript={setTranscript}
                         isLoading={isLoading}
-                        placeholder="Enter yor text here"
+                        placeholder="Enter your text here"
                     />
                     {error && (<p className="text-red-600 text-sm">{error}</p>)}
                 </section>

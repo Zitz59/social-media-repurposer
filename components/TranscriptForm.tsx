@@ -3,7 +3,6 @@
 import Button from "@/components/Button";
 
 type TranscriptFormProps = {
-    value: string;
     maxLength: number;
     handleSubmit: () => void;
     transcript: string;
@@ -21,7 +20,7 @@ const TranscriptForm = ({
                             placeholder
                         }: TranscriptFormProps) => {
 
-    const isButtonDisabled = isLoading || transcript.length >= maxLength;
+    const isButtonDisabled = isLoading || !transcript.trim();
 
     const getCounterColor = () => {
         const percentage = (transcript.length / maxLength) * 100
