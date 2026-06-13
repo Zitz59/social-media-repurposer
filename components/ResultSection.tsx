@@ -13,27 +13,29 @@ const ResultSection = ({title, content}: ResultSectionProps) => {
 
     async function handleCopy() {
         try {
-         await navigator.clipboard.writeText(content)
+            await navigator.clipboard.writeText(content)
             setCopied(true)
             console.log("Text copied to clipboard")
-            setTimeout(()=>{
+            setTimeout(() => {
                 setCopied(false)
-            },2000)
-        }catch (error) {
-            console.error("Failed to copy text",error)
+            }, 2000)
+        } catch (error) {
+            console.error("Failed to copy text", error)
         }
     }
     return (
-            <section>
-                <h2>{title}</h2>
-                <Button
-                    onClick={handleCopy}
-                    type="button"
-                    loadingText={"Loading..."}>
-                    {copied ? "Copied!" : "Copy"}
+        <section className="rounded-xl p-4 border-2 border-gray-700 w-full">
+            <div className="flex justify-between items-center">
+                <h2 className="text-lg font-semibold">{title}</h2>
+                <Button className={copied ? "bg-green-600" : "bg-gray-800"}
+                        onClick={handleCopy}
+                        type="button"
+                        loadingText={"Loading..."}>
+                    {copied ? "Copied !" : "Copy"}
                 </Button>
-                <article>{content}</article>
-            </section>
+            </div>
+            <article className="bg-gray-800 rounded-xl mt-6 p-4 whitespace-pre-wrap leading-relaxed">{content}</article>
+        </section>
     );
 };
 
