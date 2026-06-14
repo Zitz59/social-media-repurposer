@@ -39,7 +39,7 @@ export default function Home() {
         <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
             <main
                 className="flex flex-1 w-full space-y-4 max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-                <section>
+                <section className="w-full ">
                     <header>
                         <h1>Social Media Repurposer</h1>
                         <p> Transform transcripts into platform-specific social media content.</p>
@@ -50,7 +50,7 @@ export default function Home() {
                         transcript={transcript}
                         setTranscript={setTranscript}
                         isLoading={isLoading}
-                        placeholder="Enter your text here"
+                        placeholder="Enter your text here . . ."
                     />
                     {error && (<p className="text-red-600 text-sm">{error}</p>)}
                 </section>

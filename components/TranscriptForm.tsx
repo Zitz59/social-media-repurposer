@@ -30,14 +30,16 @@ const TranscriptForm = ({
     }
 
     return (
-        <form onSubmit={(e) => {
+        <form className="flex flex-col gap-3 p-4 rounded-xl  leading-relaxed "
+            onSubmit={(e) => {
             e.preventDefault()
             handleSubmit()
         }}>
-            <label htmlFor="transcript">
+            <label className="font-medium text-lg mb-1"
+                htmlFor="transcript">
                 Transcript
             </label>
-            <textarea className="bg-gray-500"
+            <textarea className="placeholder:text-gray-300 resize-none outline-none transition-all bg-gray-500 rounded-xl p-4 focus:ring-2 focus:ring-gray-400 w-full"
                       value={transcript}
                       maxLength={maxLength}
                       id="transcript"
@@ -48,14 +50,15 @@ const TranscriptForm = ({
             />
             <div className="text-right text-sm mt-1">
                 <span className={getCounterColor()}>
-                    {transcript.length} / {maxLength}
+                    {transcript.length} / {maxLength} characters
                 </span>
             </div>
-            <Button type="submit"
+            <Button className="w-fit"
+                type="submit"
                     disabled={isButtonDisabled}
                     isLoading={isLoading}
                     loadingText={"Loading..."}>
-                Generate
+               Generate
             </Button>
         </form>
 
