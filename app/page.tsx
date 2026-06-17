@@ -1,16 +1,22 @@
 'use client'
 import {useState} from "react";
 import TranscriptForm from "@/components/TranscriptForm";
-import ResultSection from "@/components/ResultSection";
 import {GeneratedContent} from "@/src/types/generated-content";
 import {generateContent} from "@/src/services/generate-content";
+import Button from "@/components/Button";
+
 
 export default function Home() {
+
 
     const [transcript, setTranscript] = useState("")
     const [generatedContent, setGeneratedContent] = useState<GeneratedContent | null>(null)
     const [isLoading, setIsLoading] = useState(false)
     const [error, setError] = useState("")
+    const [activeTab, setActiveTab] = useState('Summary')
+    const tabsData = [{title:'Summary',content:generatedContent?.summary},
+        {title:'LinkedIn Post',content:generatedContent?.linkedinPost},
+        {title:'Twitter Post',content:generatedContent?.twitterPost}]
 
     async function handleSubmit() {
         const trimmedTranscript = transcript.trim()
@@ -54,9 +60,19 @@ export default function Home() {
                     />
                     {error && (<p className="text-red-600 text-sm">{error}</p>)}
                 </section>
-                {generatedContent && <ResultSection title='Summary' content={generatedContent.summary}/>}
-                {generatedContent && <ResultSection title={'LinkedIn Post'} content={generatedContent.linkedinPost}/>}
-                {generatedContent && <ResultSection title={'Twitter Post'} content={generatedContent.twitterPost}/>}
+                {generatedContent && (
+                    <div className="flex gap-2">
+                        {tabsData.map((tab, index) => (
+                            <Button
+                                key={tab.title}
+                                loadingText={"Loading..."}
+                                type="button"
+                                onClick={()=>{setActiveTab(tab.title)}}
+                                className={activeTab === tab.title ? "bg-blue-700" : "bg-gray-500"}>{tab.title}</Button>
+                        ))}
+                        <p>Current tan : {activeTab}</p>
+                    </div>
+                )}
             </main>
         </div>
     );
