@@ -35,7 +35,7 @@ const ResultSection = ({title, content}: ResultSectionProps) => {
                     {copied ? "✓ Copied" : "Copy"}
                 </Button>
             </div>
-            <article className="bg-gray-800 rounded-xl mt-6 p-4 whitespace-pre-wrap leading-relaxed">{content}</article>
+            <article className="bg-gray-800 rounded-xl mt-6 p-4 whitespace-pre-wrap leading-relaxed transition-all duration-300">{content}</article>
         </section>
     );
 };
