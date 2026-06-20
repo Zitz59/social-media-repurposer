@@ -4,6 +4,7 @@ import TranscriptForm from "@/components/TranscriptForm";
 import {GeneratedContent} from "@/src/types/generated-content";
 import {generateContent} from "@/src/services/generate-content";
 import Button from "@/components/Button";
+import ResultSection from "@/components/ResultSection";
 
 
 export default function Home() {
@@ -14,9 +15,12 @@ export default function Home() {
     const [isLoading, setIsLoading] = useState(false)
     const [error, setError] = useState("")
     const [activeTab, setActiveTab] = useState('Summary')
-    const tabsData = [{title:'Summary',content:generatedContent?.summary},
-        {title:'LinkedIn Post',content:generatedContent?.linkedinPost},
-        {title:'Twitter Post',content:generatedContent?.twitterPost}]
+
+    const tabsData = [{title: 'Summary', content: generatedContent?.summary},
+        {title: 'LinkedIn Post', content: generatedContent?.linkedinPost},
+        {title: 'Twitter Post', content: generatedContent?.twitterPost}]
+
+    const activeContent = tabsData.find(e => e.title === activeTab)
 
     async function handleSubmit() {
         const trimmedTranscript = transcript.trim()
@@ -67,11 +71,16 @@ export default function Home() {
                                 key={tab.title}
                                 loadingText={"Loading..."}
                                 type="button"
-                                onClick={()=>{setActiveTab(tab.title)}}
+                                onClick={() => {
+                                    setActiveTab(tab.title)
+                                }}
                                 className={activeTab === tab.title ? "bg-blue-700" : "bg-gray-500"}>{tab.title}</Button>
                         ))}
                         <p>Current tan : {activeTab}</p>
                     </div>
+                )}
+                {generatedContent && activeContent && (
+                    <ResultSection title={activeContent.title} content={activeContent.content ?? ""}/>
                 )}
             </main>
         </div>
