@@ -25,17 +25,17 @@ const ResultSection = ({title, content}: ResultSectionProps) => {
     }
 
     return (
-        <section className="rounded-xl p-4 border-2 border-gray-700 w-full">
+        <section className="rounded-xl p-4 border-1 border-gray-700 w-full transition-all duration-300 ring-2 ring-green-500">
             <div className="flex justify-between items-center">
                 <h2 className="text-lg font-semibold">{title}</h2>
-                <Button className={copied ? "bg-green-600 hover:bg-green-700" : "bg-gray-800"}
+                <Button className={copied ? "bg-green-600" : "bg-gray-800 hover:bg-gray-700"}
                         onClick={handleCopy}
                         type="button"
                         loadingText={"Loading..."}>
-                    {copied ? "✓ Copied" : "Copy"}
+                    {copied ? "✓ Copied" : "📋Copy"}
                 </Button>
             </div>
-            <article className="bg-gray-800 rounded-xl mt-6 p-4 whitespace-pre-wrap leading-relaxed">{content}</article>
+            <article className="bg-gray-800 rounded-xl mt-6 p-4 whitespace-pre-wrap leading-relaxed transition-all duration-300">{content}</article>
         </section>
     );
 };
