@@ -66,7 +66,7 @@ export default function Home() {
                 </section>
                 {generatedContent && (
                     <div className="flex justify-center gap-4 w-full">
-                        {tabsData.map((tab, index) => (
+                        {tabsData.map((tab) => (
                             <Button
                                 key={tab.title}
                                 loadingText={"Loading..."}
