@@ -49,7 +49,7 @@ export default function Home() {
         <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
             <main
                 className="flex flex-1 w-full space-y-4 max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-                <section className="w-full ">
+                <section className="w-full">
                     <header>
                         <h1>Social Media Repurposer</h1>
                         <p> Transform transcripts into platform-specific social media content.</p>
@@ -65,7 +65,7 @@ export default function Home() {
                     {error && (<p className="text-red-600 text-sm">{error}</p>)}
                 </section>
                 {generatedContent && (
-                    <div className="flex gap-2">
+                    <div className="flex justify-center gap-4 w-full">
                         {tabsData.map((tab, index) => (
                             <Button
                                 key={tab.title}
@@ -74,7 +74,7 @@ export default function Home() {
                                 onClick={() => {
                                     setActiveTab(tab.title)
                                 }}
-                                className={activeTab === tab.title ? "bg-green-700" : "bg-gray-800"}>{tab.title}</Button>
+                                className={activeTab === tab.title ? "bg-green-700 hover:bg-green-600"  : "bg-gray-800 hover:bg-gray-700"}>{tab.title}</Button>
                         ))}
                     </div>
                 )}
