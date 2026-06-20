@@ -35,6 +35,7 @@ export default function Home() {
         try {
             const data = await generateContent(trimmedTranscript)
             setGeneratedContent(data)
+            setActiveTab("Summary")
 
         } catch (error) {
             console.error(error)
