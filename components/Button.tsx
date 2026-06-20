@@ -26,8 +26,7 @@ const Button = ({
         relative
         inline-flex items-center justify-center gap-2
         px-6 py-2.5 rounded-lg
-        bg-gray-500 text-white font-medium text-sm
-        hover:bg-gray-700
+         text-white font-medium text-sm
         disabled:opacity-60 disabled:cursor-not-allowed
         transition-colors duration-200
         ${className}
