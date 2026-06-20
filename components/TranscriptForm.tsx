@@ -53,7 +53,7 @@ const TranscriptForm = ({
                     {transcript.length} / {maxLength} characters
                 </span>
             </div>
-            <Button className="w-fit"
+            <Button className="w-fit bg-gray-500 hover:bg-gray-800"
                 type="submit"
                     disabled={isButtonDisabled}
                     isLoading={isLoading}
