@@ -30,8 +30,7 @@ const ResultSection = ({title, content}: ResultSectionProps) => {
                 <h2 className="text-lg font-semibold">{title}</h2>
                 <Button className={copied ? "bg-green-600" : "bg-gray-800 hover:bg-gray-700"}
                         onClick={handleCopy}
-                        type="button"
-                        loadingText={"Loading..."}>
+                        type="button">
                     {copied ? "✓ Copied" : "📋Copy"}
                 </Button>
             </div>

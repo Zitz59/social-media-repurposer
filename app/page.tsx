@@ -3,9 +3,9 @@ import {useState} from "react";
 import TranscriptForm from "@/components/TranscriptForm";
 import {GeneratedContent} from "@/src/types/generated-content";
 import {generateContent} from "@/src/services/generate-content";
-import Button from "@/components/Button";
+import {Tabs} from "@/components/Tabs";
+import {Tab, TabItem} from "@/src/types/tabs";
 import ResultSection from "@/components/ResultSection";
-
 
 export default function Home() {
 
@@ -14,11 +14,11 @@ export default function Home() {
     const [generatedContent, setGeneratedContent] = useState<GeneratedContent | null>(null)
     const [isLoading, setIsLoading] = useState(false)
     const [error, setError] = useState("")
-    const [activeTab, setActiveTab] = useState('Summary')
+    const [activeTab, setActiveTab] = useState<Tab>("Summary")
 
-    const tabsData = [{title: 'Summary', content: generatedContent?.summary},
-        {title: 'LinkedIn Post', content: generatedContent?.linkedinPost},
-        {title: 'Twitter Post', content: generatedContent?.twitterPost}]
+    const tabsData: TabItem[] = [{title: 'Summary', content: generatedContent?.summary ?? ""},
+        {title: 'LinkedIn Post', content: generatedContent?.linkedinPost ?? ""},
+        {title: 'Twitter Post', content: generatedContent?.twitterPost ?? ""}]
 
     const activeContent = tabsData.find(e => e.title === activeTab)
 
@@ -65,22 +65,9 @@ export default function Home() {
                     />
                     {error && (<p className="text-red-600 text-sm">{error}</p>)}
                 </section>
-                {generatedContent && (
-                    <div className="flex justify-center gap-4 w-full">
-                        {tabsData.map((tab) => (
-                            <Button
-                                key={tab.title}
-                                loadingText={"Loading..."}
-                                type="button"
-                                onClick={() => {
-                                    setActiveTab(tab.title)
-                                }}
-                                className={activeTab === tab.title ? "bg-green-700 hover:bg-green-600 scale-105"  : "bg-gray-800 hover:bg-gray-700"}>{tab.title}</Button>
-                        ))}
-                    </div>
-                )}
+                {generatedContent && (<Tabs tabs={tabsData} activeTab={activeTab} setActiveTab={setActiveTab}/>)}
                 {generatedContent && activeContent && (
-                    <ResultSection title={activeContent.title} content={activeContent.content ?? ""}/>
+                    <ResultSection title={activeContent.title} content={activeContent.content}/>
                 )}
             </main>
         </div>

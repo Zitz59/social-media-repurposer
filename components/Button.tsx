@@ -2,7 +2,7 @@
 type ButtonProps = {
     isLoading?: boolean
     disabled?: boolean
-    loadingText: string
+    loadingText?: string
     children: React.ReactNode
     type?: "submit" | "button" | "reset"
     onClick?: () => void
