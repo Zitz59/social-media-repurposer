@@ -9,6 +9,7 @@ import ResultSection from "@/components/ResultSection";
 import {MdSummarize} from "react-icons/md";
 import {FaLinkedin} from "react-icons/fa";
 import {FaSquareXTwitter} from "react-icons/fa6";
+import {ICON_SIZE} from "@/src/constants/constants";
 
 export default function Home() {
 
@@ -17,8 +18,6 @@ export default function Home() {
     const [isLoading, setIsLoading] = useState(false)
     const [error, setError] = useState("")
     const [activeTab, setActiveTab] = useState<Tab>("Summary")
-
-    const ICON_SIZE = 26
 
     const tabsData: TabItem[] = [{title: 'Summary', content: generatedContent?.summary ?? "", icon: <MdSummarize size={ICON_SIZE}/>},
         {title: 'LinkedIn Post', content: generatedContent?.linkedinPost ?? "", icon: <FaLinkedin size={ICON_SIZE}/>},
