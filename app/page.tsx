@@ -81,7 +81,7 @@ export default function Home() {
                                 onClick={() => {
                                     setActiveTab(tab.title)
                                 }}
-                                className={activeTab === tab.title ? "bg-green-700 hover:bg-green-600 scale-105" : "bg-gray-800 hover:bg-gray-700"}>{tab.title}</Button>
+                                className={activeTab === tab.title ? "bg-green-700 hover:bg-green-600 scale-105 transition-all duration-300" : "bg-gray-800 hover:bg-gray-700 transition-all duration-300"}>{tab.title}</Button>
                         ))}
                     </div>
                 )}
