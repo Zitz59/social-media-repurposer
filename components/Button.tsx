@@ -33,9 +33,12 @@ const Button = ({
     `}
     >
         <span className="invisible flex items-center gap-2">
-        <span className="h-4 w-4"/>
-            {loadingText}
-    </span>
+            {isLoading ? (
+                <>
+                    <span className="h-4 w-4"/>{loadingText}
+                </>
+            ) : children}
+        </span>
         <span className="absolute inset-0 flex items-center justify-center gap-2">
         {isLoading ? (
             <>
