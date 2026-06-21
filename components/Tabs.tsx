@@ -14,7 +14,6 @@ export const Tabs = ({tabs, activeTab, setActiveTab}: TabsProps) => {
             {tabs.map((tab) => (
                 <Button
                     key={tab.title}
-                    loadingText={"Loading..."}
                     type="button"
                     onClick={() => {
                         setActiveTab(tab.title);
