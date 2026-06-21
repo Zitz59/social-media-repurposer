@@ -6,6 +6,12 @@ import {generateContent} from "@/src/services/generate-content";
 import Button from "@/components/Button";
 import ResultSection from "@/components/ResultSection";
 
+type Tab = "Summary" | "LinkedIn Post" | "Twitter Post"
+
+type TabItem = {
+    title: Tab,
+    content?: string
+}
 
 export default function Home() {
 
@@ -14,9 +20,9 @@ export default function Home() {
     const [generatedContent, setGeneratedContent] = useState<GeneratedContent | null>(null)
     const [isLoading, setIsLoading] = useState(false)
     const [error, setError] = useState("")
-    const [activeTab, setActiveTab] = useState('Summary')
+    const [activeTab, setActiveTab] = useState<Tab>("Summary")
 
-    const tabsData = [{title: 'Summary', content: generatedContent?.summary},
+    const tabsData: TabItem[] = [{title: 'Summary', content: generatedContent?.summary},
         {title: 'LinkedIn Post', content: generatedContent?.linkedinPost},
         {title: 'Twitter Post', content: generatedContent?.twitterPost}]
 
@@ -75,7 +81,7 @@ export default function Home() {
                                 onClick={() => {
                                     setActiveTab(tab.title)
                                 }}
-                                className={activeTab === tab.title ? "bg-green-700 hover:bg-green-600 scale-105"  : "bg-gray-800 hover:bg-gray-700"}>{tab.title}</Button>
+                                className={activeTab === tab.title ? "bg-green-700 hover:bg-green-600 scale-105" : "bg-gray-800 hover:bg-gray-700"}>{tab.title}</Button>
                         ))}
                     </div>
                 )}
