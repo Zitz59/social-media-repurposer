@@ -10,7 +10,7 @@ type Tab = "Summary" | "LinkedIn Post" | "Twitter Post"
 
 type TabItem = {
     title: Tab,
-    content?: string
+    content: string
 }
 
 export default function Home() {
@@ -22,9 +22,9 @@ export default function Home() {
     const [error, setError] = useState("")
     const [activeTab, setActiveTab] = useState<Tab>("Summary")
 
-    const tabsData: TabItem[] = [{title: 'Summary', content: generatedContent?.summary},
-        {title: 'LinkedIn Post', content: generatedContent?.linkedinPost},
-        {title: 'Twitter Post', content: generatedContent?.twitterPost}]
+    const tabsData: TabItem[] = [{title: 'Summary', content: generatedContent?.summary ?? ""},
+        {title: 'LinkedIn Post', content: generatedContent?.linkedinPost ?? ""},
+        {title: 'Twitter Post', content: generatedContent?.twitterPost ?? ""}]
 
     const activeContent = tabsData.find(e => e.title === activeTab)
 
@@ -86,7 +86,7 @@ export default function Home() {
                     </div>
                 )}
                 {generatedContent && activeContent && (
-                    <ResultSection title={activeContent.title} content={activeContent.content ?? ""}/>
+                    <ResultSection title={activeContent.title} content={activeContent.content}/>
                 )}
             </main>
         </div>
