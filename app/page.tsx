@@ -6,9 +6,11 @@ import {generateContent} from "@/src/services/generate-content";
 import {Tabs} from "@/components/Tabs";
 import {Tab, TabItem} from "@/src/types/tabs";
 import ResultSection from "@/components/ResultSection";
+import {MdSummarize} from "react-icons/md";
+import {FaLinkedin} from "react-icons/fa";
+import {FaSquareXTwitter} from "react-icons/fa6";
 
 export default function Home() {
-
 
     const [transcript, setTranscript] = useState("")
     const [generatedContent, setGeneratedContent] = useState<GeneratedContent | null>(null)
@@ -16,9 +18,11 @@ export default function Home() {
     const [error, setError] = useState("")
     const [activeTab, setActiveTab] = useState<Tab>("Summary")
 
-    const tabsData: TabItem[] = [{title: 'Summary', content: generatedContent?.summary ?? ""},
-        {title: 'LinkedIn Post', content: generatedContent?.linkedinPost ?? ""},
-        {title: 'Twitter Post', content: generatedContent?.twitterPost ?? ""}]
+    const ICON_SIZE = 26
+
+    const tabsData: TabItem[] = [{title: 'Summary', content: generatedContent?.summary ?? "", icon: <MdSummarize size={ICON_SIZE}/>},
+        {title: 'LinkedIn Post', content: generatedContent?.linkedinPost ?? "", icon: <FaLinkedin size={ICON_SIZE}/>},
+        {title: 'Twitter Post', content: generatedContent?.twitterPost ?? "", icon: <FaSquareXTwitter size={ICON_SIZE}/>}]
 
     const activeContent = tabsData.find(e => e.title === activeTab)
 
@@ -65,9 +69,18 @@ export default function Home() {
                     />
                     {error && (<p className="text-red-600 text-sm">{error}</p>)}
                 </section>
-                {generatedContent && (<Tabs tabs={tabsData} activeTab={activeTab} setActiveTab={setActiveTab}/>)}
+                {generatedContent && (
+                    <Tabs
+                        tabs={tabsData}
+                        activeTab={activeTab}
+                        setActiveTab={setActiveTab}/>
+                )}
                 {generatedContent && activeContent && (
-                    <ResultSection title={activeContent.title} content={activeContent.content}/>
+                    <ResultSection
+                        title={activeContent.title}
+                        content={activeContent.content}
+                        icon={activeContent.icon}
+                    />
                 )}
             </main>
         </div>

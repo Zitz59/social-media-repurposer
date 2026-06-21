@@ -1,14 +1,15 @@
 'use client'
 
-import {useState} from "react";
+import {ReactNode, useState} from "react";
 import Button from "@/components/Button";
 
 type ResultSectionProps = {
     title: string;
     content: string;
+    icon: ReactNode;
 }
 
-const ResultSection = ({title, content}: ResultSectionProps) => {
+const ResultSection = ({title, content, icon}: ResultSectionProps) => {
     const [copied, setCopied] = useState(false)
 
     async function handleCopy() {
@@ -25,16 +26,22 @@ const ResultSection = ({title, content}: ResultSectionProps) => {
     }
 
     return (
-        <section className="rounded-xl p-4 border-1 border-gray-700 w-full transition-all duration-300 ring-2 ring-green-500">
+        <section
+            className="rounded-xl p-4 border-1 border-gray-700 w-full transition-all duration-300 ring-2 ring-green-500">
             <div className="flex justify-between items-center">
-                <h2 className="text-lg font-semibold">{title}</h2>
+                <div className="flex items-center gap-2">
+                    <h2 className="text-lg font-semibold">{title}</h2>
+                    <span className="flex ">{icon}</span>
+                </div>
                 <Button className={copied ? "bg-green-600" : "bg-gray-800 hover:bg-gray-700"}
                         onClick={handleCopy}
                         type="button">
                     {copied ? "✓ Copied" : "📋Copy"}
                 </Button>
             </div>
-            <article className="bg-gray-800 rounded-xl mt-6 p-4 whitespace-pre-wrap leading-relaxed transition-all duration-300">{content}</article>
+            <article
+                className="bg-gray-800 rounded-xl mt-6 p-4 whitespace-pre-wrap leading-relaxed transition-all duration-300">{content}
+            </article>
         </section>
     );
 };
