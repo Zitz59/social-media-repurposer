@@ -8,9 +8,10 @@ export async function generateContent(transcript: string): Promise<GeneratedCont
     })
 
     if (!response.ok) {
-        throw new Error(
-            `Request failed with status${response.status}`)
+        const responseMessage = await response.json()
+        throw new Error (responseMessage.error)
     }
 
     return response.json()
 }
+

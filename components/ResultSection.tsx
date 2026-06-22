@@ -16,7 +16,6 @@ const ResultSection = ({title, content, icon}: ResultSectionProps) => {
         try {
             await navigator.clipboard.writeText(content)
             setCopied(true)
-            console.log("Text copied to clipboard")
             setTimeout(() => {
                 setCopied(false)
             }, 2000)
