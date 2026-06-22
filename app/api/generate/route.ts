@@ -7,7 +7,7 @@ export async function POST(request: Request) {
         const {transcript} = body
         if (!transcript?.trim()) {
             return NextResponse.json(
-                {error: "No summary records found."}
+                {error: "Please enter a transcript"},{status:422}
             )
         }
 
@@ -20,7 +20,7 @@ export async function POST(request: Request) {
         return NextResponse.json(generatedContent)
     } catch (_error) {
         return NextResponse.json(
-            {error: "Something went wrong, please try again."}
+            {error: "Something went wrong, please try again."},{status:500}
         )
     }
 }
