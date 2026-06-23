@@ -1,7 +1,6 @@
 'use client'
 import {useState} from "react";
 import TranscriptForm from "@/components/TranscriptForm";
-import {GeneratedContent} from "@/src/types/generated-content";
 import {generateContent} from "@/src/services/generate-content";
 import {Tabs} from "@/components/Tabs";
 import {Tab, TabItem} from "@/src/types/tabs";
@@ -10,6 +9,7 @@ import {MdSummarize} from "react-icons/md";
 import {FaLinkedin} from "react-icons/fa";
 import {FaSquareXTwitter} from "react-icons/fa6";
 import {ICON_SIZE} from "@/src/constants/constants";
+import {GeneratedContent} from "@/app/api/generate/route";
 
 export default function Home() {
 

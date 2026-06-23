@@ -1,5 +1,6 @@
 import {NextResponse} from "next/server";
 import {Anthropic} from "@anthropic-ai/sdk";
+import {z} from "zod";
 
 if (!process.env.ANTHROPIC_API_KEY) {
     throw new Error('ANTHROPIC_API_KEY environment variable is missing');
@@ -7,6 +8,14 @@ if (!process.env.ANTHROPIC_API_KEY) {
 const anthropic = new Anthropic(
     {apiKey: process.env.ANTHROPIC_API_KEY as string},
 );
+
+const dataSchema = z.object({
+    summary: z.string().min(10).max(25000),
+    linkedinPost: z.string().min(10).max(25000),
+    twitterPost: z.string().min(10).max(3000),
+})
+
+export type GeneratedContent = z.infer<typeof dataSchema>
 
 
 export async function POST(request: Request) {
