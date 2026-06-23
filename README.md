@@ -14,7 +14,8 @@ AI-powered tool that transforms transcripts into platform-specific social media 
 - Next.js
 - TypeScript
 - Tailwind CSS
-- OpenAI API
+- Antrophic API
+- Zod
 
 ## Development
 
