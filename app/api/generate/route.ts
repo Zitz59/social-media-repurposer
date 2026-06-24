@@ -13,6 +13,7 @@ const dataSchema = z.object({
     summary: z.string().min(10).max(25000),
     linkedinPost: z.string().min(10).max(25000),
     twitterPost: z.string().min(10).max(3000),
+    youtubeDescription: z.string().min(10).max(3000),
 })
 
 export type GeneratedContent = z.infer<typeof dataSchema>
@@ -33,6 +34,7 @@ export async function POST(request: Request) {
             summary: `Summary for: ${transcript}`,
             linkedinPost: `LinkedIn version:${transcript}`,
             twitterPost: `Twitter version:${transcript}`,
+            youtubeDescription: `YouTube description:${transcript}`,
         }
 
         return NextResponse.json(generatedContent)
