@@ -1,15 +1,15 @@
 'use client'
 import {useState} from "react";
 import TranscriptForm from "@/components/TranscriptForm";
-import {GeneratedContent} from "@/src/types/generated-content";
 import {generateContent} from "@/src/services/generate-content";
 import {Tabs} from "@/components/Tabs";
 import {Tab, TabItem} from "@/src/types/tabs";
 import ResultSection from "@/components/ResultSection";
 import {MdSummarize} from "react-icons/md";
 import {FaLinkedin} from "react-icons/fa";
-import {FaSquareXTwitter} from "react-icons/fa6";
+import {FaSquareXTwitter, FaSquareYoutube} from "react-icons/fa6";
 import {ICON_SIZE} from "@/src/constants/constants";
+import {GeneratedContent} from "@/src/types/generated-content";
 
 export default function Home() {
 
@@ -21,7 +21,9 @@ export default function Home() {
 
     const tabsData: TabItem[] = [{title: 'Summary', content: generatedContent?.summary ?? "", icon: <MdSummarize size={ICON_SIZE}/>},
         {title: 'LinkedIn Post', content: generatedContent?.linkedinPost ?? "", icon: <FaLinkedin size={ICON_SIZE}/>},
-        {title: 'Twitter Post', content: generatedContent?.twitterPost ?? "", icon: <FaSquareXTwitter size={ICON_SIZE}/>}]
+        {title: 'Twitter Post', content: generatedContent?.twitterPost ?? "", icon: <FaSquareXTwitter size={ICON_SIZE}/>},{
+        title:'Youtube Description',content:generatedContent?.youtubeDescription ?? "", icon:<FaSquareYoutube size={ICON_SIZE}/>
+        }]
 
     const activeContent = tabsData.find(e => e.title === activeTab)
 
@@ -59,7 +61,7 @@ export default function Home() {
                         <p> Transform transcripts into platform-specific social media content.</p>
                     </header>
                     <TranscriptForm
-                        maxLength={500}
+                        maxLength={50000}
                         handleSubmit={handleSubmit}
                         transcript={transcript}
                         setTranscript={setTranscript}
