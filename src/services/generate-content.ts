@@ -1,4 +1,4 @@
-import {GeneratedContent} from "@/app/api/generate/route";
+import {GeneratedContent} from "@/src/types/generated-content";
 
 export async function generateContent(transcript: string): Promise<GeneratedContent> {
     const response = await fetch('/api/generate', {
