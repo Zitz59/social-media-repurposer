@@ -9,7 +9,7 @@ import {MdSummarize} from "react-icons/md";
 import {FaLinkedin} from "react-icons/fa";
 import {FaSquareXTwitter, FaSquareYoutube} from "react-icons/fa6";
 import {ICON_SIZE} from "@/src/constants/constants";
-import {GeneratedContent} from "@/app/api/generate/route";
+import {GeneratedContent} from "@/src/types/generated-content";
 
 export default function Home() {
 
@@ -61,7 +61,7 @@ export default function Home() {
                         <p> Transform transcripts into platform-specific social media content.</p>
                     </header>
                     <TranscriptForm
-                        maxLength={500}
+                        maxLength={50000}
                         handleSubmit={handleSubmit}
                         transcript={transcript}
                         setTranscript={setTranscript}
