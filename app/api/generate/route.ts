@@ -111,6 +111,7 @@ export async function POST(request: Request) {
         })
         const firstBlock = msg.content[0]
         if (firstBlock && isTextBlock(firstBlock)) {
+            console.log("RAW RESPONSE",firstBlock.text)
             const textObject = JSON.parse(firstBlock.text.replace(/```([\s\S]*?)```/g, ""))
             const validatedData = dataSchema.parse(textObject)
             return NextResponse.json(validatedData)
