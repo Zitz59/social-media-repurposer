@@ -2,7 +2,7 @@
 
 Reworks any text in an article for LinkedIn, Twitter, or a video description on YouTube
 
-[![Live Demo]([https://shields.io](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white))](https://social-media-repurposer.vercel.app/)
+![Live Demo]((https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white))](https://social-media-repurposer.vercel.app/)
 
 ![Demo](https://raw.githubusercontent.com/Zitz59/social-media-repurposer/main/public/demo.gif)
 
@@ -19,7 +19,7 @@ Reworks any text in an article for LinkedIn, Twitter, or a video description on 
 ![Next.js](https://img.shields.io/badge/Next.js-16-black)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5-blue)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?logo=tailwind-css&logoColor=white)
-![Anthropic API](https://img.shields.io/badge/Anthropic-000000?logo=Anthropic&logoColor=white))
+![Anthropic API](https://img.shields.io/badge/Anthropic-000000?logo=Anthropic&logoColor=white)
 ![Zod](https://img.shields.io/badge/-Zod-3E67B1?style=flat&logo=zod&logoColor=white)
 
 ## Getting Started
